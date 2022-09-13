@@ -637,11 +637,11 @@ const sendEmail = () => {
 };
 
 const setImageUrl = (image) => {
-  return new URL("/src/assets/images/" + image, import.meta.url);
+  return new URL("/" + image, import.meta.url);
 };
 
 const setPdfUrl = (pdf) => {
-  return new URL("/src/assets/pdf/" + pdf, import.meta.url);
+  return new URL("/" + pdf, import.meta.url);
 };
 
 const setModel = (value) => {

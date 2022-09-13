@@ -2,7 +2,7 @@
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 const setImageUrl = (index) => {
-  return new URL("/src/assets/images/hero-" + index + ".png", import.meta.url);
+  return new URL("/hero-" + index + ".png", import.meta.url);
 };
 </script>
 

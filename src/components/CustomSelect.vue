@@ -117,7 +117,7 @@ const selectOption = (option) => {
 };
 
 const setImageUrl = (image) => {
-  return new URL("/src/assets/images/" + image + ".png", import.meta.url);
+  return new URL("/" + image + ".png", import.meta.url);
 };
 
 const checkShowImage = () => {

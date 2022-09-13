@@ -310,13 +310,13 @@ export default {
     var productImage = computed({
       get() {
         return new URL(
-          "/src/assets/images/" +
+          "/" +
             product.value.name.toLowerCase() +
             "-" +
             imageUrl.value +
             ".png",
           import.meta.url
-        );
+        ).href;
       },
     });
 
