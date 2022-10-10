@@ -184,7 +184,16 @@
             </div>
           </form>
         </div>
-        <div class="flex flex-col flex-[46%] bg-white p-[25px] md:p-[40px] drop-shadow">
+        <div
+          class="
+            flex flex-col flex-[46%]
+            bg-white
+            p-[25px]
+            md:p-[40px]
+            drop-shadow
+          "
+        >
+          <Logo class="ml-[-33px] pb-[20px]"/>
           <div
             class="
               flex
@@ -196,7 +205,6 @@
               text-[#4c4c4c]
               md:flex-row
               flex-col
-             
             "
           >
             <b class="font-bold">Address:</b>
@@ -221,7 +229,8 @@
               text-[#4c4c4c]
               md:flex-row
               flex-col
-              mt-[15px] md:mt-0
+              mt-[15px]
+              md:mt-0
             "
           >
             <b class="font-bold">Office:</b>
@@ -237,7 +246,7 @@
           </div>
           <div
             class="
-             flex
+              flex
               w-full
               md:gap-[8px]
               font-rubik
@@ -246,7 +255,8 @@
               text-[#4c4c4c]
               md:flex-row
               flex-col
-              mt-[15px] md:mt-0
+              mt-[15px]
+              md:mt-0
             "
           >
             <b class="font-bold">Phone:</b>
@@ -271,7 +281,8 @@
               text-[#4c4c4c]
               md:flex-row
               flex-col
-              mt-[15px] md:mt-0
+              mt-[15px]
+              md:mt-0
             "
           >
             <b class="font-bold">Email:</b>
@@ -296,6 +307,7 @@
 import PageHero from "../components/PageHero.vue";
 import MapLocation from "../components/MapLocation.vue";
 import emailjs from "@emailjs/browser";
+import Logo from "../components/Logo.vue"
 
 export default {
   data() {
@@ -308,6 +320,7 @@ export default {
   components: {
     PageHero,
     MapLocation,
+    Logo
   },
   methods: {
     sendEmail() {

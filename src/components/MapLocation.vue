@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2832.5355282445985!2d17.1915533!3d44.7698865!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd4c61ad2ceaf7d5d!2sBitLab%20d.o.o!5e0!3m2!1sbs!2sba!4v1651745244976!5m2!1sbs!2sba"
+      src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Kringa, Prenci 38a&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
       width="100%"
       height="450"
       style="border: 0"

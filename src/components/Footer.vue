@@ -28,7 +28,7 @@
           </p>
         </div>
 
-        <div class="flex items-center gap-[19px]">
+        <!-- <div class="flex items-center gap-[19px]">
           <a
             title="Facebook"
             class="
@@ -62,7 +62,7 @@
             href=""
           >
           </a>
-        </div>
+        </div> -->
       </div>
       <div>
         <h3

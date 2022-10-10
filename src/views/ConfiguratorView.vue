@@ -11,6 +11,7 @@
             :label="modelLabel"
             @setProp="setModel"
             width="222"
+            :error="modelError"
             :items="[
               { name: 'TL1 LED PENDANT LUMINAIRE' },
               { name: 'TL2 LED CEILING LUMINAIRE' },
@@ -20,6 +21,7 @@
           <CustomSelect
             label="LIGHT DISTRIBUTION"
             @setProp="setLight"
+            :error="lightError"
             :disabled="dataModel.model ? false : true"
             width="177"
             :items="lightItems"
@@ -27,6 +29,7 @@
           <CustomSelect
             :label="colorLabel"
             @setProp="setColor"
+            :error="colorError"
             width="155"
             :disabled="dataModel.model ? false : true"
             :items="colorItems"
@@ -34,6 +37,7 @@
           <CustomSelect
             label="LENGTH"
             @setProp="setLength"
+            :error="lengthError"
             width="100"
             :disabled="dataModel.model ? false : true"
             :items="lengthItems"
@@ -41,6 +45,7 @@
           <CustomSelect
             label=">COL. TEM."
             @setProp="setCol"
+            :error="colError"
             width="122"
             :disabled="dataModel.model ? false : true"
             :items="[{ name: '830 - 30000K' }, { name: '840 - 4000K' }]"
@@ -48,6 +53,7 @@
           <CustomSelect
             label="DIRECT/INDIRECT"
             @setProp="setDirect"
+            :error="directError"
             width="151"
             :disabled="dataModel.model ? false : true"
             :items="directItems"
@@ -55,6 +61,7 @@
           <CustomSelect
             label="CONTROL"
             @setProp="setControl"
+            :error="controlError"
             width="173"
             :disabled="dataModel.model ? false : true"
             :items="[{ name: 'PUSH DIMMING. DALI' }, { name: 'ON/OFF' }]"
@@ -474,27 +481,134 @@
                 </tbody>
               </table>
             </div>
-            <div class="mt-[25px]">
+            <div class="mt-[50px]">
               <div class="flex items-end justify-between flex-wrap gap-[20px]">
-                <div class="flex flex-col gap-[5px]">
-                  <label
-                    class="text-[15px] leading-[28px] text-[#4c4c4c] font-rubik"
-                    >Your email</label
-                  >
-                  <input
-                    v-model="userEmail"
-                    required
-                    class="
-                      outline-none
-                      focus:outline-none
-                      border-[1px] border-[#ff7800]
-                      px-[8px]
-                      py-[5px]
-                      mr-[5px]
-                    "
-                    type="email"
-                    placeholder="Your Email"
-                  />
+                <div class="">
+                  <div class="flex flex-wrap gap-[13px] justify-between">
+                    <div class="md:flex-[30%] flex-[100%]">
+                      <label
+                        class="
+                          font-rubik
+                          text-[15px]
+                          leading-[28px]
+                          text-[#4c4c4c]
+                        "
+                      >
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        v-model="userName"
+                        class="
+                          outline-0
+                          focus:outline-0 focus:border-b-[#FF7800]
+                          border-0 border-b-[1px] border-b-[#2d2d2d]
+                          p-0
+                          mb-0
+                          bg-transparent
+                          h-[34px]
+                          text-[14px]
+                          color-[#555555]
+                          leading-[1.42857143]
+                          w-full
+                        "
+                        name="from_name"
+                      />
+                    </div>
+                    <div class="md:flex-[30%] flex-[100%]">
+                      <label
+                        class="
+                          font-rubik
+                          text-[15px]
+                          leading-[28px]
+                          text-[#4c4c4c]
+                        "
+                      >
+                        E-mail
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        v-model="userEmail"
+                        class="
+                          outline-0
+                          focus:outline-0 focus:border-b-[#FF7800]
+                          border-0 border-b-[1px] border-b-[#2d2d2d]
+                          p-0
+                          mb-0
+                          bg-transparent
+                          h-[34px]
+                          text-[14px]
+                          color-[#555555]
+                          leading-[1.42857143]
+                          w-full
+                        "
+                        name="from_email"
+                      />
+                    </div>
+                    <div class="md:flex-[30%] flex-[100%]">
+                      <label
+                        class="
+                          font-rubik
+                          text-[15px]
+                          leading-[28px]
+                          text-[#4c4c4c]
+                        "
+                      >
+                        Phone number
+                      </label>
+                      <input
+                        type="text"
+                        v-model="userPhone"
+                        class="
+                          outline-0
+                          focus:outline-0 focus:border-b-[#FF7800]
+                          border-0 border-b-[1px] border-b-[#2d2d2d]
+                          p-0
+                          mb-0
+                          bg-transparent
+                          h-[34px]
+                          text-[14px]
+                          color-[#555555]
+                          leading-[1.42857143]
+                          w-full
+                        "
+                        name="from_phone"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full mt-[20px]">
+                    <label
+                      class="
+                        font-rubik
+                        text-[15px]
+                        leading-[28px]
+                        text-[#4c4c4c]
+                      "
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      type="text"
+                      required
+                      v-model="userMessage"
+                      class="
+                        outline-0
+                        focus:outline-0 focus:border-b-[#FF7800]
+                        border-0 border-b-[1px] border-b-[#2d2d2d]
+                        p-0
+                        mb-0
+                        bg-transparent
+                        h-[34px]
+                        text-[14px]
+                        color-[#555555]
+                        leading-[1.42857143]
+                        w-full
+                      "
+                      name="from_message"
+                    />
+                  </div>
                 </div>
 
                 <button class="btn flex gap-[10px] items-center">
@@ -558,7 +672,20 @@ const productStore = useProductStore();
 var productStoreData = storeToRefs(productStore);
 var showError = ref(false);
 var activeItem = ref(0);
+
 var userEmail = ref("");
+var userName = ref("");
+var userPhone = ref("");
+var userMessage = ref("");
+
+var modelError = ref(false);
+var lightError = ref(false);
+var colorError = ref(false);
+var lengthError = ref(false);
+var colError = ref(false);
+var directError = ref(false);
+var controlError = ref(false);
+
 var emailError = ref(false);
 var emailSuccess = ref(false);
 var isLoading = ref(false);
@@ -692,7 +819,13 @@ const sendEmail = () => {
   productStoreData.selectedProducts.value.forEach((element) => {
     makeString += `Product: ${element.dataPass} (${element.quantity} quantity) is requested. `;
   });
-  var requestedObj = { products: makeString, email: userEmail.value };
+  var requestedObj = {
+    products: makeString,
+    email: userEmail.value,
+    name: userName.value,
+    phoneNumber: userPhone.value,
+    message: userMessage.value,
+  };
   emailjs
     .send(
       "service_0o3fhge",
@@ -725,48 +858,76 @@ const setPdfUrl = (pdf) => {
 const setModel = (value) => {
   dataModel.value.model = value;
   productStore.setShowError(false);
+  modelError.value = false;
   showError.value = false;
 };
 
 const setLight = (value) => {
   dataModel.value.light = value;
   productStore.setShowError(false);
+  lightError.value = false;
   showError.value = false;
 };
 
 const setColor = (value) => {
   dataModel.value.color = value;
   productStore.setShowError(false);
+  colorError.value = false;
   showError.value = false;
 };
 
 const setLength = (value) => {
   dataModel.value.length = value;
   productStore.setShowError(false);
+  lengthError.value = false;
   showError.value = false;
 };
 
 const setCol = (value) => {
   dataModel.value.col = value;
   productStore.setShowError(false);
+  colError.value = false;
   showError.value = false;
 };
 
 const setDirect = (value) => {
   dataModel.value.direct = value;
   productStore.setShowError(false);
+  directError.value = false;
   showError.value = false;
 };
 
 const setControl = (value) => {
   dataModel.value.control = value;
   productStore.setShowError(false);
+  controlError.value = false;
   showError.value = false;
 };
 
 const saveDataModel = () => {
   if (Object.keys(dataModel.value).length !== 15) {
     showError.value = true;
+    if (!dataModel.value.model) {
+      modelError.value = true;
+    }
+    if (!dataModel.value.light) {
+      lightError.value = true;
+    }
+    if (!dataModel.value.color) {
+      colorError.value = true;
+    }
+    if (!dataModel.value.length) {
+      lengthError.value = true;
+    }
+    if (!dataModel.value.col) {
+      colError.value = true;
+    }
+    if (!dataModel.value.direct) {
+      directError.value = true;
+    }
+    if (!dataModel.value.control) {
+      controlError.value = true;
+    }
     return;
   }
   var dataPass = createDataPass();
