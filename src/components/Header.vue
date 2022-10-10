@@ -321,6 +321,7 @@
           justify-center
           w-full
           h-full
+          mobile-nav
         "
       >
         <router-link to="/" class="" @click="openMenu = false && openSubmenu == false && openSubSubMenu == false"

@@ -21,7 +21,7 @@ const goTo = (refName) => {
 
 <template>
   <main>
-    <div class="relative w-full h-[645px]">
+    <div class="relative w-full h-[645px] overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-full hero-slider">
         <carousel
           :items-to-show="1"
@@ -36,7 +36,7 @@ const goTo = (refName) => {
               :style="{ backgroundImage: `url(${setImageUrl(slide)})` }"
             >
               <div
-                class="container text-left pt-[170px] pb-[77px] relative z-50"
+                class="container text-left pt-[130px] pb-[77px] relative z-50"
               >
                 <div class="mb-[10px]">
                   <h1
@@ -155,7 +155,8 @@ const goTo = (refName) => {
         class="
           select-arrows
           absolute
-          bottom-[30px]
+          md:bottom-[55px]
+          bottom-0
           left-[50%]
           h-[76px]
           w-[60px]
@@ -302,7 +303,7 @@ const goTo = (refName) => {
               30
             </p>
             <span class="text-[12px] leading-[16px] font-rubik text-[#4c4c4c]">
-              BUSINESS DAILY GROWTH
+              BUSINESS DAILY GROWTH.
             </span>
           </div>
           <div
