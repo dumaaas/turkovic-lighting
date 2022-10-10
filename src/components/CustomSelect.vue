@@ -3,15 +3,20 @@
     <div
       class="
         relative
-        text-[#ff7800] text-[13px]
+        text-[12px]
         leading-[28px]
         px-[12px]
         py-[8px]
-        border-[1px] border-[#ff7800]
+        border-[1px]
         cursor-pointer
+        pointer-events-none
         bg-white
       "
-      :class="`width-${width}`"
+      :style="{
+        width: +width + 'px',
+        'pointer-events': +disabled ? 'none' : 'auto',
+      }"
+      :class="disabled ? 'text-gray-400 border-gray-400' : 'text-[#ff7800] border-[#ff7800]'"
       @focusout="dialogToggler(false)"
       tabindex="0"
     >
@@ -32,8 +37,17 @@
               v-else
             ></div>
           </div>
-          <p v-if="checkShowImage && (labelReal === 'GRIGIO ANTICO' || labelNew === 'GRIGIO ANTICO')">
-            {{ labelReal ? truncateString(labelReal, 10) : truncateString(labelNew, 10) }}
+          <p
+            v-if="
+              checkShowImage &&
+              (labelReal === 'GRIGIO ANTICO' || labelNew === 'GRIGIO ANTICO')
+            "
+          >
+            {{
+              labelReal
+                ? truncateString(labelReal, 10)
+                : truncateString(labelNew, 10)
+            }}
           </p>
           <p v-else>
             {{ labelReal ? labelReal : labelNew }}
@@ -49,7 +63,7 @@
             transition-all
             duration-150
           "
-          :class="showDialog ? 'rotate-180' : ''"
+          :class="[showDialog ? 'rotate-180' : '', disabled ? 'border-t-gray-400' : 'border-t-[#ff7800]']"
         ></div>
       </div>
 
@@ -98,6 +112,10 @@ const props = defineProps({
   items: Array,
   label: String,
   width: String,
+  disabled: {
+    default: false,
+    type: Boolean,
+  },
 });
 
 const emits = defineEmits(["setProp"]);
@@ -152,12 +170,11 @@ const truncateString = (str, num) => {
   // If the length of str is less than or equal to num
   // just return str--don't truncate it.
   if (str.length <= num) {
-    return str
+    return str;
   }
   // Return str truncated with '...' concatenated to the end of str.
-  return str.slice(0, num) + '...'
-}
-
+  return str.slice(0, num) + "...";
+};
 </script>
 
 <style lang="scss" scoped>

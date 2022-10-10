@@ -5,13 +5,7 @@
       <div class="container py-[50px]">
         <button class="btn" @click="refreshPage()">START NEW ONE</button>
         <div
-          class="
-            flex flex-wrap
-            items-center
-            justify-center
-            gap-[6px]
-            my-[29px]
-          "
+          class="flex flex-wrap items-center justify-center gap-[6px] my-[29px]"
         >
           <CustomSelect
             :label="modelLabel"
@@ -26,48 +20,43 @@
           <CustomSelect
             label="LIGHT DISTRIBUTION"
             @setProp="setLight"
+            :disabled="dataModel.model ? false : true"
             width="177"
-            :items="[
-              { name: 'PRO RASTER UGR < 19' },
-              { name: 'OPAL OPAL COVER' },
-            ]"
+            :items="lightItems"
           />
           <CustomSelect
             :label="colorLabel"
             @setProp="setColor"
             width="155"
-            :items="[
-              { name: 'GOLDEN OAK', image: 'go' },
-              { name: 'GRIGIO ANTICO', image: 'grigio' },
-              { name: 'WHITE', image: 'white' },
-            ]"
+            :disabled="dataModel.model ? false : true"
+            :items="colorItems"
           />
           <CustomSelect
             label="LENGTH"
             @setProp="setLength"
             width="100"
-            :items="[
-              { name: '960 mm' },
-              { name: '1150 mm' },
-              { name: '1342 mm' },
-            ]"
+            :disabled="dataModel.model ? false : true"
+            :items="lengthItems"
           />
           <CustomSelect
             label=">COL. TEM."
             @setProp="setCol"
             width="122"
+            :disabled="dataModel.model ? false : true"
             :items="[{ name: '830 - 30000K' }, { name: '840 - 4000K' }]"
           />
           <CustomSelect
             label="DIRECT/INDIRECT"
             @setProp="setDirect"
             width="151"
-            :items="[{ name: 'DIRECT+INDIRECT' }, { name: 'DIRECT' }]"
+            :disabled="dataModel.model ? false : true"
+            :items="directItems"
           />
           <CustomSelect
             label="CONTROL"
             @setProp="setControl"
             width="173"
+            :disabled="dataModel.model ? false : true"
             :items="[{ name: 'PUSH DIMMING. DALI' }, { name: 'ON/OFF' }]"
           />
         </div>
@@ -187,7 +176,15 @@
         class="w-full bg-[#f5f5f5]"
         v-if="productStoreData.selectedProducts.value.length"
       >
-        <div class=" overflow-x-auto overflow-y-hidden container pt-[40px] pb-[100px] relative">
+        <div
+          class="
+            overflow-x-auto overflow-y-hidden
+            container
+            pt-[40px]
+            pb-[100px]
+            relative
+          "
+        >
           <div
             class="
               flex
@@ -344,7 +341,7 @@
               </p>
             </div>
           </div>
-          <a href="#arrows_select" class="select-arrows">
+          <a @click="goTo('requestList')" class="cursor-pointer select-arrows">
             <svg class="arrows-select">
               <!-- <path class="a1" d="M0 0 L30 32 L60 0"></path> -->
               <path class="a2" d="M0 20 L30 52 L60 20"></path>
@@ -356,6 +353,7 @@
       <div
         class="w-full bg-white"
         v-if="productStoreData.selectedProducts.value.length"
+        ref="requestList"
       >
         <div class="container py-[25px]">
           <div class="flex items-center justify-center">
@@ -568,7 +566,12 @@ var modelLabel = ref("MODEL");
 var colorLabel = ref("HOSUING COLOR");
 const router = useRouter();
 
-console.log(router, "router");
+const requestList = ref();
+
+var lengthItems = ref([]);
+var directItems = ref([{ name: "DIRECT+INDIRECT" }, { name: "DIRECT" }]);
+var lightItems = ref([]);
+var colorItems = ref([]);
 
 var dataModel = ref({
   weight: "1.2kg",
@@ -580,6 +583,76 @@ var dataModel = ref({
   pdfInstallmentUrl: "",
   pdfGeneralUrl: "",
 });
+
+watch(
+  () => dataModel.value.model,
+  (newValue, oldValue) => {
+    if (newValue) {
+      let modelName = newValue.split(" ")[0];
+      switch (modelName) {
+        case "TL1":
+          lengthItems.value = [
+            { name: "960 mm" },
+            { name: "1150 mm" },
+            { name: "1342 mm" },
+            { name: "1533 mm" },
+          ];
+          directItems.value = [{ name: "DIRECT+INDIRECT" }, { name: "DIRECT" }];
+          lightItems.value = [
+            { name: "PRO RASTER UGR < 19" },
+            { name: "PRO2" },
+            { name: "OPAL OPAL COVER" },
+          ];
+          colorItems.value = [
+            { name: "GOLDEN OAK", image: "go" },
+            { name: "GRIGIO ANTICO", image: "grigio" },
+            { name: "WHITE", image: "white" },
+          ];
+          break;
+        case "TL2":
+          lengthItems.value = [
+            { name: "960 mm" },
+            { name: "1150 mm" },
+            { name: "1342 mm" },
+            { name: "1533 mm" },
+          ];
+          directItems.value = [{ name: "DIRECT" }];
+          lightItems.value = [
+            { name: "PRO RASTER UGR < 19" },
+            { name: "PRO2" },
+            { name: "OPAL OPAL COVER" },
+          ];
+          colorItems.value = [
+            { name: "GOLDEN OAK", image: "go" },
+            { name: "GRIGIO ANTICO", image: "grigio" },
+            { name: "WHITE", image: "white" },
+          ];
+          break;
+        case "TL3":
+          lengthItems.value = [{ name: "385 mm" }, { name: "960 mm" }];
+          directItems.value = [{ name: "DIRECT+INDIRECT" }, { name: "DIRECT" }];
+          lightItems.value = [
+            { name: "PRO RASTER UGR < 19" },
+            { name: "PRO2" },
+            { name: "OPAL OPAL COVER" },
+            { name: "MIX" },
+            { name: "MIX2" },
+          ];
+          colorItems.value = [
+            { name: "GOLDEN OAK", image: "go" },
+            { name: "GRIGIO ANTICO", image: "grigio" },
+            { name: "WHITE", image: "white" },
+            { name: "MIX", image: "white" },
+            { name: "MIX2", image: "white" },
+          ];
+          break;
+        default:
+          break;
+      }
+    }
+  },
+  { deep: true }
+);
 
 onMounted(() => {
   if (router.currentRoute.value.query) {
@@ -594,6 +667,12 @@ onMounted(() => {
       case "white":
         color = "WHITE";
         break;
+      case "mix":
+        color = "WHITE";
+        break;
+      case "mix2":
+        color = "WHITE";
+        break;
       default:
         return;
         break;
@@ -602,7 +681,6 @@ onMounted(() => {
     modelLabel.value = router.currentRoute.value.query.model;
     setColor(color);
     colorLabel.value = color;
-    console.log('hej hej')
   }
 });
 
@@ -645,7 +723,6 @@ const setPdfUrl = (pdf) => {
 };
 
 const setModel = (value) => {
-  console.log('value', value)
   dataModel.value.model = value;
   productStore.setShowError(false);
   showError.value = false;
@@ -703,7 +780,6 @@ const saveDataModel = () => {
 
   var pdfGeneralUrl = createPdfGeneralUrl();
   dataModel.value.pdfGeneralUrl = pdfGeneralUrl;
-  console.log(pdfGeneralUrl, "url");
 
   var p = Object.assign({}, dataModel.value);
   productStore.addSelectedProduct(p);
@@ -724,6 +800,12 @@ const createImageUrl = () => {
     case "WHITE":
       imageFinal = "-white.png";
       break;
+    case "MIX":
+      imageFinal = "-white.png";
+      break;
+    case "MIX2":
+      imageFinal = "-white.png";
+      break;
   }
 
   return imageUrl + imageFinal;
@@ -739,15 +821,116 @@ const createPdfGeneralUrl = () => {
   return pdf.toLowerCase() + "_general.pdf";
 };
 
+const goTo = (refName) => {
+  var element = requestList.value;
+  element.scrollIntoView({ behavior: "smooth" });
+};
+
+const createId = (name, length, direct, light) => {
+  var id = "";
+  if (name == "TL3") {
+    if (length == "L385") {
+      id = "18";
+    } else {
+      if (direct == "DIRECT") {
+        id = "22";
+      } else {
+        id = "44";
+      }
+    }
+  } else {
+    if (length === "L960") {
+      if (direct == "DIRECT") {
+        if (light == "OPAL") {
+          id = "31";
+        } else {
+          id = "33";
+        }
+      } else {
+        if (light == "OPAL") {
+          id = "37";
+        } else {
+          id = "39";
+        }
+      }
+    } else if (length === "L1150") {
+      if (direct == "DIRECT") {
+        if (light == "OPAL") {
+          id = "37";
+        } else {
+          id = "39";
+        }
+      } else {
+        if (light == "OPAL") {
+          id = "43";
+        } else {
+          id = "46";
+        }
+      }
+    } else if (length === "L1342") {
+      if (direct == "DIRECT") {
+        if (light == "OPAL") {
+          id = "49";
+        } else {
+          id = "46";
+        }
+      } else {
+        if (light == "OPAL") {
+          id = "49";
+        } else {
+          id = "52";
+        }
+      }
+    } else if (length === "L1533") {
+      if (direct == "DIRECT") {
+        if (light == "OPAL") {
+          id = "49";
+        } else {
+          id = "52";
+        }
+      } else {
+        if (light == "OPAL") {
+          id = "55";
+        } else {
+          id = "58";
+        }
+      }
+    }
+  }
+  return id;
+};
+
 const createDataPass = () => {
   var nameArr = dataModel.value.model.split(" ");
-  var name = nameArr[0] + "-" + nameArr[2];
+  var name = nameArr[0];
   var light = dataModel.value.light.split(" ")[0];
-  var color = dataModel.value.color.split(" ")[0];
+  var colorClone = dataModel.value.color.split(" ")[0];
+  var color = "";
+  switch (colorClone) {
+    case "GOLDEN":
+      color = "GO";
+      break;
+    case "GRIGIO":
+      color = "GA";
+      break;
+    case "WHITE":
+      color = "WH";
+      break;
+    case "MIX":
+      color = "MIX";
+      break;
+    case "MIX2":
+      color = "MIX2";
+      break;
+    default:
+      break;
+  }
   var length = "L" + dataModel.value.length.split(" ")[0];
   var col = dataModel.value.col.split(" ")[0];
   var direct = dataModel.value.direct == "DIRECT" ? "1" : "2";
   var control = dataModel.value.control == "ON/OFF" ? "1" : "2";
+
+  var productId = createId(name, length, dataModel.value.direct, light);
 
   var dataPass =
     name +
@@ -759,6 +942,8 @@ const createDataPass = () => {
     length +
     "-" +
     col +
+    "-" +
+    productId +
     "-" +
     direct +
     "-" +

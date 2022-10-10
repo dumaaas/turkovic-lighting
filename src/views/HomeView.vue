@@ -1,8 +1,21 @@
 <script setup>
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+import { ref } from "vue";
+
+const description = ref();
+
 const setImageUrl = (index) => {
   return new URL("/hero-" + index + ".png", import.meta.url);
+};
+const goTo = (refName) => {
+  var element = description.value;
+  const yOffset = -30;
+  const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+  if (element) {
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
 };
 </script>
 
@@ -137,8 +150,26 @@ const setImageUrl = (index) => {
           </slide>
         </carousel>
       </div>
+      <a
+        @click="goTo('description')"
+        class="
+          select-arrows
+          absolute
+          bottom-[30px]
+          left-[50%]
+          h-[76px]
+          w-[60px]
+          cursor-pointer
+        "
+      >
+        <svg class="arrows-select">
+          <!-- <path class="a1" d="M0 0 L30 32 L60 0"></path> -->
+          <path class="a2" d="M0 20 L30 52 L60 20"></path>
+          <path class="a3" d="M0 40 L30 72 L60 40"></path>
+        </svg>
+      </a>
     </div>
-    <div class="w-full bg-white">
+    <div class="w-full bg-white" ref="description">
       <div class="container py-[50px]">
         <div
           class="
