@@ -241,9 +241,18 @@
     box-shadow: -3px -3px 3px 0 rgb(0 0 0 / 19%), 3px 0 3px 0 rgb(0 0 0 / 19%), 0 3px 3px 0 rgb(0 0 0 / 23%);
 }
 
-div:has(.vue-sticky-element) {
+/* div:has(.vue-sticky-element) {
+    height: 0 !important;
+} */
+
+.header-selector div:nth-child(2) {
     height: 0 !important;
 }
+
+.header-selector .vue-sticky-element div:nth-child(2) {
+    height: auto !important;
+}
+
 
 /* Hamburger menu */
 

@@ -1,6 +1,6 @@
 <template>
   <header
-    class="w-full bg-white relative z-[100]"
+    class="w-full bg-white relative z-[100] header-selector"
     :class="router.currentRoute.value.name == 'home' ? 'bg-black' : 'bg-white'"
   >
     <div
